@@ -1,0 +1,48 @@
+---
+title: '"Friends'' Information"'
+author: "Tajudeen Riskat Temitope"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+### Friends Data
+
+The table below shows some details about my friends and I, including our age, height, weight, and skin color.
+
+```{r}
+# Create a data frame with friends information
+friends_data <- data.frame(Name = c("Adesewa", "Balikis", "Suzan", "Aishat", "Lydia", "Julianah", "Bolanle", "Temitope"), Age = c(23, 23, 22, 22, 23, 23, 23, 25), Height = c("6ft", "5ft2", "5ft", "5ft", "6ft", "4ft8", "5ft6", "5ft3"), Weight = c(105, 45, 50, 40, 45, 40, 56, 78), Skincolor = c("Fair skin", "Caramel skin", "Chocolate Skin", "Dark skin", "Caramel skin", "Chocolate skin", "Dark skin", "Dark skin"))
+
+# Print the table
+friends_data
+```                           
+```{r}
+summary(friends_data)
+```
+
+```{r pressure, echo=FALSE}
+plot(friends_data)
+```
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(friends_data, aes(x = Name, y = Age, fill = Skincolor)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(title = "Age Distribution of Friends", x = "Age Distribution of Friends", y = "Age")
+```
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(friends_data, aes(x = Name, y = Weight, fill = Skincolor)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_bw() +
+  labs(title = "Weight Distribution of Friends", x = "WEIGHT DISTRIBUTION OF FRIENDS", y = "Weight (kg)")
+scale_fill_viridis_b()
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
