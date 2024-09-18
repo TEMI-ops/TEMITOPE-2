@@ -1,0 +1,59 @@
+---
+title: "Fruit Data Visualization"
+author: "Tajudeen Riskat Temitope"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+install.packages("tm")
+# Load library
+library(tm)
+```
+```{r}
+# Define text data
+text_data <- c("Apple is a popular fruit loved by many people worldwide.", "Orange is rich in vitamin C and is a favorite citrus fruit.", "Strawberry is sweet, juicy, and often used in desserts.", "Avocado is healthy fruit often used in salads and sandwiches.", "Apple and Orange are commonly consumed as fresh fruits or juices.", "Strawberry and Avocado have gained popularity in health-conscious diets.")
+```
+
+```{r}
+# Create a corpus using VCorpus
+corpus <- VCorpus(VectorSource(text_data))
+
+# Clean the text
+corpus_clean <- tm_map(corpus,content_transformer(tolower))
+corpus_clean <- tm_map(corpus_clean, removePunctuation)
+corpus_clean <- tm_map(corpus_clean, removeWords, stopwords("english"))
+
+# Create a Document-Term Matrix
+dtm <- DocumentTermMatrix(corpus_clean)
+
+# Convert the Document-Term Matrix to a matrix
+dtm_matrix <- as.matrix(dtm)
+
+# Get the word frequency by summing the columns
+word_freq <- colSums(dtm_matrix)
+
+# Print the word frequency
+print(word_freq)
+```
+
+```{r}
+summary(word_freq)
+```
+
+
+```{r}
+plot(word_freq)
+```
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+```
+```{r}
+# Create a Pie Chart
+pie(word_freq, labels = names(word_freq), main = "Word Frequency Pie Chart", col = rainbow(length(word_freq)))
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

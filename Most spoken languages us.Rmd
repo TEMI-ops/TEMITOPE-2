@@ -1,0 +1,55 @@
+---
+title: "READ EXCEL FILE"
+author: "Tajudeen Riskat Temitope"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+#install.packages("readxl")
+install.packages("dplyr")
+library(readxl)
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+data <- read_excel("C:/Users/hp/Desktop/Temi Thesis/LANGUAGES IN THE US 2010.xlsx")
+```
+
+```{r}
+head(data)
+summary(data)
+```
+
+
+
+```{r}
+plot(data)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+plot(1:10)
+```
+
+```{r}
+mean(data$`Ages 5 +`)
+mean(data$Percentage)
+```
+```{r}
+min1 <- min(data$`Ages 5 +`)
+min2 <- min(data$Percentage)
+data2 <- data$Languages[data$`Ages 5 +`== min1]
+paste("The lowest  language spoken is", data2, "with a total number of", min1, "people")
+```
+```{r}
+sd(data$`Ages 5 +`)
+sd(data$Percentage)
+```
+#plot pie chart
+```{r}
+pie(data$`Ages 5 +`!= "All languages other than English Combined", main = "Pie Chart of Languages Spoken",col = "brown", labels = data$Languages)
+```
+
